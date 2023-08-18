@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+	
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+  overflow: auto;
+}
+
+article span {
+margin-right: 10px;
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+div{
+        width: 100%;
+        height: 80%;
+    }
+    div.left {
+        width: 20%;
+        float: left;
+        
+    }
+    div.right {
+        width: 80%;
+        float: right;
+        
+    }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>Cities</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href="#">London</a></li>
+      <li><a href="#">Paris</a></li>
+      <li><a href="#">Tokyo</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+	<div style="height:5%;">
+  	<h1>영업 사원 관리</h1>
+  	</div>
+  	<br>
+  	<div style="width:80%; height: 65%; overflow: auto;">
+  	<table width="100%" border="1" style="text-align:center; border-collapse:collapse; overflow-y: scroll; ">
+  <tr>
+    <th style="background-color: rgb(255, 128, 192);">번호</th>
+    <th style="background-color: rgb(255, 128, 192);">이름</th>
+    <th style="background-color: rgb(255, 128, 192);">전화번호</th>
+    <th style="background-color: rgb(255, 128, 192);">ID</th>
+    <th style="background-color: rgb(255, 128, 192);">PW</th>
+    <th style="background-color: rgb(255, 128, 192);">실적</th> 
+    <th style="background-color: rgb(255, 128, 192);">상태</th> 
+    <th style="background-color: rgb(255, 128, 192);">버튼1</th> 
+    <th style="background-color: rgb(255, 128, 192);">버튼2</th> 
+    <th style="background-color: rgb(255, 128, 192);">버튼3</th> 
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">1</td>
+    <td><input type="text" id="user_id" size="10" value="김건영" style="border: none; background: transparent; text-align: center;"></td>
+    <td><input type="text" id="user_id" size="10" value="010-1111-1111" style="border: none; background: transparent; text-align: center;"></td>
+    <td><input type="text" id="user_id" size="10" value="user1" style="border: none; background: transparent; text-align: center;"></td>
+    <td><input type="text" id="user_id" size="10" value="1234" style="border: none; background: transparent; text-align: center;"></td>
+    <td><input type="text" id="user_id" size="10" value="230" style="border: none; background: transparent; text-align: center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">2</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">3</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">4</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">5</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">6</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">7</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">8</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">9</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">10</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">11</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">12</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">13</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">14</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  <tr>
+    <td style="background-color: rgb(192, 192, 192);">15</td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td><input type="text" id="user_id" size="10"  style="border: none; background: transparent; text-align:center;"></td>
+    <td>재직</td>
+    <td><input type = "button" value = "수정" ></td>
+    <td><input type = "button" value = "실적(사원실적이동)" onclick ="location.href='http://localhost:8080/employeerevenue.html'" style = "background-color:darkgray"></td>
+    <td><input type = "button" value = "비활성화" style = "background-color:darkgray"></td>
+  </tr>
+  
+</table>
+  </div>
+  <br>
+	<div style="width:80%; height:5%; text-align: right;">
+	<input type = "button" style="WIDTH: 60pt;"  value="추가" >	
+	</div>
+  </article>
+</section>
+
+<footer>
+  <p>Footer</p>
+</footer>
+
+</body>
+</html>
+
