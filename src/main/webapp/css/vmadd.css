@@ -1,0 +1,28 @@
+.right {
+	font-size: 24px;
+	float: left;
+	margin-left: 20%;
+	margin-top: 5%;
+	border: 2px solid #ccc;
+	padding: 20px;
+}
+
+.left {
+	font-size: 20px;
+	float: left;
+	margin-left: 10%;
+
+}
+.left input{
+	font-size: 16px;
+}
+ 
+.btn-group input[type="button"]{
+	margin-top: 10%;
+	margin-right: 2%;
+	 padding: 10px 20px;
+	font-size: 16px;
+	float: right;
+	background-color: #6a24fe;
+	color: white;
+}

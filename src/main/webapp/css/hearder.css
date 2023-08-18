@@ -1,0 +1,20 @@
+.container .head nav ul {
+	display: flex;
+}
+
+.container .head nav ul li {
+	padding: 20px;
+}
+
+.container .head nav ul li a {
+	font-size: 1.5rem;
+}
+.container .head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #6a24fe;
+}
+.container .head h1 {
+	padding-left: 1.7%;
+}
