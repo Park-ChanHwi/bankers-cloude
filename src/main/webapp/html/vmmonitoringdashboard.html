@@ -1,265 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 	<title>CSS Template</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
-		* {
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-		}
 
-		a,
-		a:link,
-		a:visited {
-			color: black;
-			text-decoration: none;
-		}
+	<link rel="stylesheet" href="../css/vmmonitoringdashboard.css">
 
-		li {
-			list-style: none;
-		}
+	<link rel="stylesheet" href="../css/hearder.css">
+	<link rel="stylesheet" href="../css/body.css ">
+	<link rel="stylesheet" href="../css/footer.css">
+	<link rel="stylesheet" href="../css/sidebar.css">
+	<link rel="stylesheet" href="../css/style.css">
 
-		header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background-color: #6a24fe;
-		}
+	<link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
 
-		header h2 {
-			padding-left: 1.7%;
-		}
-
-		header nav ul {
-			display: flex;
-		}
-
-		header nav ul li {
-			display: inline-flex;
-			padding: 20px;
-		}
-
-		header nav ul li a {
-			font-size: 1.5rem;
-		}
-
-		nav {
-			width: 12%;
-			float: left;
-			border: 1px solid;
-			box-sizing: border-box;
-			background-color: white;
-		}
-
-		nav .btn-group button {
-			display: block;
-			width: 100%;
-			height: 100%;
-			padding: 15%;
-			font-size: 18px;
-			font-weight: bold;
-			background-color: orange;
-		}
-
-
-		article {
-			width: 88%;
-			float: right;
-			border: 1px solid;
-			box-sizing: border-box;
-			height: calc(100vh - 120px);
-			background-color: white;
-		}
-
-
-		article h2 {
-			font-size: 30px;
-			margin: 2%;
-		}
-
-
-		.scroll-container .scrolltable {
-			overflow-y: scroll;
-		}
-
-		.scroll-container {
-			height: 250px;
-			overflow: auto;
-			position: absolute;
-			font-size: 20px;
-			display: inline-block;
-		}
-
-		.scrolltable {
-			border-collapse: collapse;
-		}
-
-		.scrolltable thead {
-			position: sticky;
-			top: 0px;
-			background-color: #6a24fe;
-			color: white;
-		}
-
-		.scrolltable td,
-		th {
-			width: 20px;
-			height: 50px;
-			text-align: center;
-			border: 1px solid #ccc;
-		}
-
-		.scrolltable,
-		th,
-		td {
-			border-collapse: collapse;
-		}
-
-		.scrolltable tbody td:nth-child(1) {
-			width: 50px;
-		}
-
-		.scrolltable tbody td:nth-child(2) {
-			width: 100px;
-			background-color: #D9D9D9
-		}
-
-		.scrolltable tbody td:nth-child(3) {
-			width: 70px;
-		}
-
-		.scrolltable tbody td:nth-child(4) {
-			width: 150px;
-		}
-
-		.scrolltable tbody td:nth-child(5) {
-			width: 200px;
-		}
-
-
-		footer {
-			width: 100%;
-			text-align: center;
-			background-color: rgb(230, 230, 230);
-		}
-
-		/* Style the list inside the menu */
-		nav ul {
-			list-style-type: none;
-			padding: 0;
-		}
-
-		/* Clear floats after the columns */
-		section::after {
-			content: "";
-			display: table;
-			clear: both;
-		}
-
-		/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-		@media (max-width: 600px) {
-
-			nav,
-			article {
-				width: 100%;
-				height: auto;
-			}
-		}
-	</style>
 </head>
 
 <body>
-	<header>
-		<h2>
-			<p>BANKERS | 영업팀</p>
-		</h2>
-		<nav>
-			<ul>
-				<li> <a>USER</a> </li>
-				<li> <a href="user.html">로그아웃</a> </li>
-			</ul>
-		</nav>
-	</header>
 
-	<section>
-		<nav>
-			<ul class="btn-group">
-				<button onclick="location.href='mainpage.html'">메인</button>
-				<button onclick="window.location.href='customermanagement.html'">기존 고객 관리</button>
-				<button onclick="window.location.href='employeemanagent.html'">영업 사원 관리</button>
-			</ul>
-		</nav>
+	<div class="container">
 
-		<article>
+		<div class="head">
+
+			<h1>
+
+				<p>BANKERS | SeoulMeta</p>
+			</h1>
+			<nav>
+				<ul>
+					<li>
+						<a>USER</a>
+					</li>
+					<li>
+						<a href="index.html">로그아웃</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="sidebar">
+			<div class="btn-group">
+				<button>VM 대시보드</button>
+				<button onclick="window.location.href='newcustumer.html'">모니터링</button>
+
+			</div>
+		</div>
+		<div class="body">
 			<h2>모니터링 리스트</h2>
-			<form id="registrationForm" action="" method="POST">
-				<div class="scroll-container">
-					<table class="scrolltable">
-						<thead>
-							<th scope="col">번호</th>
-							<th scope="col">VM 이름</th>
-							<th scope="col">CPU %</th>
-							<th scope="col">RAM %, GB</th>
-							<th scope="col">Storage %, GB</th>
-							<th scope="col">버튼</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>GOD</td>
-								<td>sm</td>
-								<td>123</td>
-								<td>123</td>
-								<td>123</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>GOD</td>
-								<td>sm123</td>
-								<td>1231231</td>
-								<td>1231231</td>
-								<td>1231231</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>GOD</td>
-								<td>sm123</td>
-								<td>1231231</td>
-								<td>1231231</td>
-								<td>1231231</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>GOD</td>
-								<td>sm123</td>
-								<td>1231231</td>
-								<td>1231231</td>
-								<td>1231231</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>GOD</td>
-								<td>sm123</td>
-								<td>1231231</td>
-								<td>1231231</td>
-								<td>1231231</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form>
-		</article>
-	</section>
+			<div class="scroll-container">
+				<table class="scrolltable">
+					<thead>
 
-	<footer>
-		<p>BANKERS. fisabankers@gmail.com tel.010-XXXX-XXXX</p>
-		<p>서울특별시 마포구 월드컵북로 434 (상암동, 상암 IT Tower 6층)</p>
-	</footer>
+						<th scope="col">번호</th>
+						<th scope="col">VM 이름</th>
+						<th scope="col">CPU %</th>
+						<th scope="col">RAM %, GB</th>
+						<th scope="col">Storage %, GB</th>
+						<th scope="col">버튼</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>VM-1</td>
+							<td>23%</td>
+							<td>32%, 8GB</td>
+							<td>12%, 20GB</td>
+							<td><input type="button" onclick="location.href='vmmonitoring.html'" value="자세히 보기"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
+			<input type="button" class="table-button" " onclick=" location.href='vmadd.html'" value=" 추가">
+
+		</div>
+
+		<div class="footer">
+
+			<p>BANKERS. fisabankers@gmail.com tel.010-XXXX-XXXX</p>
+
+			<p>서울특별시 마포구 월드컵북로 434 (상암동, 상암 IT Tower 6층)</p>
+
+
+		</div>
 
 </body>
 

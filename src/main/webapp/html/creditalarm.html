@@ -1,142 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
-<title>CSS Template</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0px;
-  padding: 0px;
-}
+	<title>CSS Template</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
+	<link rel="stylesheet" href="../css/vmmanagement.css">
 
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
+	<link rel="stylesheet" href="../css/hearder.css">
+	<link rel="stylesheet" href="../css/body.css ">
+	<link rel="stylesheet" href="../css/footer.css">
+	<link rel="stylesheet" href="../css/sidebar.css">
+	<link rel="stylesheet" href="../css/style.css">
 
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
+	<link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+	<style>
 
-article {
-	
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-  
-}
-
-article span {
-margin-right: 10px;
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-div{
-        width: 100%;
-        height: 80%;
-    }
-    div.left {
-        width: 20%;
-        float: left;
-        
-    }
-    div.right {
-        width: 80%;
-        float: right;
-        
-    }
-</style>
+	</style>
 </head>
+
 <body>
+	<div class="container">
+		<div class="head">
+			<h1>
+				<p>BANKERS | SeoulMeta</p>
+			</h1>
+			<nav>
+				<ul>
+					<li>
+						<a>USER</a>
+					</li>
+					<li>
+						<a href="index.html">로그아웃</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="sidebar">
+			<div class="btn-group">
+				<button onclick="location.href='vmdashboard.html'">VM 대시보드</button>
+				<button>모니터링</button>
+				<button>크레딧 알림</button>
+				<button>사원 관리</button>
+			</div>
+		</div>
+		<div class="body">
+			<h2>
+				크레딧 알림
+			</h2>
 
-<header>
-  <h2>Cities</h2>
-</header>
+			<div class="box1">
+				<ul>
+					<li>보유 크레딧 / 최대 크레딧 <input type="text" /></li>
+					<li> <input type="text" /> </li>
+					<br>
+					<li>알람 사용</li>
+					<li>
+						<label>
+							1% <input type="checkbox" />
+						</label>
+					</li>
+					<li>
+						<label>
+							5% <input type="checkbox" />
+						</label>
+					</li>
+					<li>
+						<label>
+							50% <input type="checkbox" />
+						</label>
+					</li>
+					<li>사용자 지정 <input type="text" /></li>
+					<li>알림 받을 이메일 <input type="text" /></li>
+					<br>
+					<br>
+					<br>
+					<p>&nbsp;&nbsp;&nbsp;알림 사용 여부&nbsp<input type="checkbox" name="xxx"
+							value="yyy">
+						&nbsp<input type="submit" value="취소" onclick="location.href=''">
+						&nbsp<input type="reset" value="수정">
 
-<section>
-  <nav>
-    <ul>
-      <li><a href="#">London</a></li>
-      <li><a href="#">Paris</a></li>
-      <li><a href="#">Tokyo</a></li>
-    </ul>
-  </nav>
-  
-  <article>
-  	<h1>크래딧 알림</h1>
-  	<br>
-  	<p> 보유 크래딧</p>
-  	<p> 173,320/230,000        74%</p>
-  	<br>
 
-  	<p style = "font-size:14px"> 알람 사용 </p>
-	<p style="font-size: 14px; display: flex; align-items: center;">
-	<span style="margin-right: 100px;">1%</span>
-	<input type="checkbox" name="xxx" value="yyy">
-	
-	<p style="font-size: 14px; display: flex; align-items: center;">
-	<span style="margin-right: 100px;">5%</span>
-	<input type="checkbox" name="xxx" value="yyy">
-	
-	<p style="font-size: 14px; display: flex; align-items: center;">
-	<span style="margin-right: 92.5px;">50%</span>
-	<input type="checkbox" name="xxx" value="yyy">
-	
-	<p style = "font-size:14px"> 사용자 지정 <input size=10></p>
-	<p style = "font-size:14px"> 알림 받을 이메일 <input></p>
-	   <br>
-	<p style = "font-size:14px">&nbsp;&nbsp;&nbsp;알림 사용 여부&nbsp<input type="checkbox" name="xxx" value="yyy" >
-	&nbsp<input type="submit" value="취소" onclick ="location.href=''">
-	&nbsp<input type="reset" value="수정" >		
-	
-	
-  </article>
-</section>
+				</ul>
 
-<footer>
-  <p>Footer</p>
-</footer>
-
+			</div>	
+		</div>
+		<div class="footer">
+			<p>BANKERS. fisabankers@gmail.com tel.010-XXXX-XXXX</p>
+			<p>서울특별시 마포구 월드컵북로 434 (상암동, 상암 IT Tower 6층)</p>
+		</div>
+	</div>
 </body>
+
 </html>
