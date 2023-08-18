@@ -1,0 +1,20 @@
+.sidebar {
+	height: calc(100vh - 120px);
+	background-color: white;
+	width: 12%;
+	float: left
+}
+
+.sidebar {
+	border: 1px solid;
+	box-sizing: border-box;
+}
+.sidebar .btn-group button {
+	display: block;
+	width: 100%;
+	padding: 15%;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+
+}
