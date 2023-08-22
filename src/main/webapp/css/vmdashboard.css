@@ -69,11 +69,11 @@ th {
 }
 
 .table-button {
-	float: right;
-	margin-top: 20%;
-	margin-right: 15%;
+	position: absolute;
+	right: 15%;
+	bottom: 30%;
 	color: white;
 	background-color: #6a24fe;
-	font-size: 16px;
-	padding: 3px 5px;
+	font-size: 20px;
+	padding: 10px 20px;
 }
