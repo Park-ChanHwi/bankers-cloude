@@ -20,7 +20,7 @@
 
 <body>
 
-	<div class="container" >
+	<div class="container">
 
 		<div class="head">
 
@@ -51,7 +51,6 @@
 			<div class="scroll-container">
 				<table class="scrolltable">
 					<thead>
-
 						<th scope="col">번호</th>
 						<th scope="col">VM 이름</th>
 						<th scope="col">ID</th>
@@ -64,7 +63,7 @@
 					<tbody>
 						<tr>
 							<td>1</td>
-							<td>VM-1</td>
+							<td class="vm-name">Default Value</td>
 							<td>if5xp7qc</td>
 							<td>on</td>
 							<td>A</td>
@@ -129,6 +128,7 @@
 
 		</div>
 
+	</div>
 </body>
 
 </html>
