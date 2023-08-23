@@ -3,51 +3,53 @@
 <!DOCTYPE html>
 
 <html lang="ko">
+
 <head>
-	<title>CSS Template</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="../css/vmdashboard.css">
+<link rel="stylesheet" href="../css/vmdashboard.css">
 
-	<link rel="stylesheet" href="../css/hearder.css">
-	<link rel="stylesheet" href="../css/body.css ">
-	<link rel="stylesheet" href="../css/footer.css">
-	<link rel="stylesheet" href="../css/sidebar.css">
-	<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/hearder.css">
+<link rel="stylesheet" href="../css/body.css ">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/sidebar.css">
+<link rel="stylesheet" href="../css/style.css">
 
-	<link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+<link rel="icon" type="image/x-icon"
+	href="../images/favicon/favicon.ico">
 
 </head>
 
 <body>
 
 	<div class="container">
+
 		<div class="head">
+
 			<h1>
+
 				<p>BANKERS | SeoulMeta</p>
 			</h1>
 			<nav>
 				<ul>
-					<li>
-						<a>USER</a>
-					</li>
-					<li>
-						<a href="index.html">로그아웃</a>
-					</li>
+					<li><a>USER</a></li>
+					<li><a href="index.html">로그아웃</a></li>
 				</ul>
 			</nav>
 		</div>
 		<div class="sidebar">
 			<div class="btn-group">
 				<button>VM 대시보드</button>
-				<button onclick="window.location.href='newcustumer.html'">모니터링</button>
+				<button onclick="window.location.href=''">모니터링</button>
+
 			</div>
 		</div>
 		<div class="body">
 			<h2>VM 대시보드</h2>
 			<div class="scroll-container">
-				<table class="scrolltable">
+				<table id="vmTable" class="scrolltable">
 					<thead>
 						<th scope="col">번호</th>
 						<th scope="col">VM 이름</th>
@@ -59,61 +61,67 @@
 						<th scope="col">버튼</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td class="vm-name">Default Value</td>
-							<td>if5xp7qc</td>
-							<td>on</td>
-							<td>A</td>
-							<td>73klqafb2b3pxhcthp6y2ufk</td>
-							<td>user1</td>
-							<td><input type="button" onclick="location.href='vmmanagement.html'" value="VM 관리"></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>VM-2</td>
-							<td>if5ke2ac</td>
-							<td>off</td>
-							<td>B</td>
-							<td>83klqafb2b3pxhcthp6y2ufk</td>
-							<td>user2</td>
-							<td><input type="button" onclick="location.href='vmmanagement.html'" value="VM 관리"></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>VM-3</td>
-							<td>if5ke2ac</td>
-							<td>on</td>
-							<td>C</td>
-							<td>53klqafb2b3pxhcthp6y2ufk</td>
-							<td>user3</td>
-							<td><input type="button" onclick="location.href='vmmanagement.html'" value="VM 관리"></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>VM-4</td>
-							<td>if5ke2ac</td>
-							<td>off</td>
-							<td>D</td>
-							<td>23klqafb2b3pxhcthp6y2ufk</td>
-							<td>user4</td>
-							<td><input type="button" onclick="location.href='vmmanagement.html'" value="VM 관리"></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>VM-5</td>
-							<td>if5ke2ac</td>
-							<td>off</td>
-							<td>D</td>
-							<td>13klqafb2b3pxhcthp6y2ufk</td>
-							<td>user5</td>
-							<td><input type="button" onclick="location.href='vmmanagement.html'" value="VM 관리"></td>
-						</tr>
+
 					</tbody>
 				</table>
+				
 			</div>
-
 			<input type="button" class="table-button" " onclick=" location.href='../html/vmadd.html'" value=" 추가">
+			<script>
+				var vmnamea = "${vmname}";
+				var vmnameb = vmnamea.replace(/ /g, '');
+				var vmnamec = vmnameb.slice(1, -1);
+				var vmnamed = vmnamec.split(',');
+				
+				var vmaddressa = "${vmaddress}";
+				var vmaddressb = vmaddressa.replace(/ /g, '');
+				var vmaddressc = vmaddressb.slice(1, -1);
+				var vmaddressd = vmaddressc.split(',');
+				
+				for(var i = 0; i < vmnamed.length; i++){
+					addRow(i+1, vmnamed[i], vmaddressd[i]);
+				}
+				
+				function addRow(number, vmname, vmaddress) {
+		            var table = document.getElementById("vmTable");
+		            var newRow = document.createElement("tr");
+
+		            var cell1 = document.createElement("td");
+		            cell1.textContent = number; // 셀 내용을 설정
+		            newRow.appendChild(cell1);
+
+		            var cell2 = document.createElement("td");
+		            cell2.textContent = vmname; // 셀 내용을 설정
+		            newRow.appendChild(cell2);
+
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = "temp"; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = "30"; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+		            
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = "30"; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+		           
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = vmaddress; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+		            
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = "30"; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+		            
+		            var cell3 = document.createElement("td");
+		            cell3.textContent = "30"; // 셀 내용을 설정
+		            newRow.appendChild(cell3);
+		            
+		            table.getElementsByTagName('tbody')[0].appendChild(newRow);
+		        }
+			</script>
+			
 
 		</div>
 
@@ -127,6 +135,7 @@
 		</div>
 
 	</div>
+
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package bankers.fisa.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -24,28 +25,56 @@ public class MainController {
 		return mv;
 	}
 	
+	
+	
 	@PostMapping("/login")
 	public ModelAndView login(
 			@RequestParam("loginID") String loginID,
 			@RequestParam("loginPW") String loginPW) {
 		ModelAndView mv = new ModelAndView();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI loginUri = UriComponentsBuilder.fromUriString("http://localhost:7070")
 				.path("/controller/login")
 				.encode()
 				.build()
 				.toUri();
 
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("loginID", loginID);
-		parameters.add("loginPW", loginPW);
+		MultiValueMap<String, String> loginParameters = new LinkedMultiValueMap<>();
+		loginParameters.add("loginID", loginID);
+		loginParameters.add("loginPW", loginPW);
 		
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
+		RestTemplate loginRestTemplate = new RestTemplate();
+		ResponseEntity<String> loginResponseEntity = loginRestTemplate.postForEntity(loginUri, loginParameters, String.class);
 		
-		if(responseEntity.getBody().equals("true")) {
+		if(loginResponseEntity.getBody().equals("true")) {
 			mv.setViewName("vmdashboard");
-		}else if(responseEntity.getBody().equals("false")){
+			
+			ArrayList<String> vmname = new ArrayList<String>();
+			ArrayList<String> vmaddress = new ArrayList<String>();
+			
+			URI vmUri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+					.path("/controller/vmlist")
+					.encode()
+					.build()
+					.toUri();
+			
+			MultiValueMap<String, String> vmParameters = new LinkedMultiValueMap<>();
+			vmParameters.add("loginID", loginID);
+			vmParameters.add("loginPW", loginPW);
+			
+			RestTemplate vmRestTemplate = new RestTemplate();
+			ResponseEntity<String> responseEntity = vmRestTemplate.postForEntity(vmUri, vmParameters, String.class);
+			
+			String[] strArr2 = responseEntity.getBody().toString().split(",");
+			for(String str : strArr2) {
+				String[] strArr3 = str.split("_");
+				vmname.add(strArr3[2]);
+				vmaddress.add(strArr3[4]);
+			}
+			
+			mv.addObject("vmname", vmname);
+			mv.addObject("vmaddress", vmaddress);
+		}else if(loginResponseEntity.getBody().equals("false")){
 			mv.setViewName("fail");
 		}
 		
