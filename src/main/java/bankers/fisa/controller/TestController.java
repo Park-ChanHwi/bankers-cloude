@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/cloud-test")
+@RequestMapping("/test")
 public class TestController {
 
 	@RequestMapping("/customer")
@@ -33,14 +33,6 @@ public class TestController {
 		
 		mv.setViewName("NewFile");
 		return mv;
-		/*
-		 * URI uri = UriComponentsBuilder .fromUriString("http://localhost:7070")
-		 * .path("/center-test/test") .encode() .build() .toUri();
-		 * 
-		 * RestTemplate restTemplate = new RestTemplate(); ResponseEntity<String>
-		 * responseEntity = restTemplate.getForEntity(uri, String.class); return
-		 * responseEntity.getBody();
-		 */
 	}
 
 	@GetMapping("/session-test")
@@ -49,7 +41,6 @@ public class TestController {
 				.toUri();
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		// parameters.add("test-session", "test");
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);

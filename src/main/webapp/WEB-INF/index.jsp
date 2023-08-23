@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +23,9 @@
                     <p>고성능 VM과 넉넉한 RAM, 충분한 저장용량까지 저렴한 가격에 이용해보세요.</p>
                 </div>
                 <div class="right">
-                    <form action="/cloud-test/customer" method="">
+                    <form action="/login" method="post">
                         <h2>Login</h2>
-                        <input type="text" id="id" placeholder="ID">
+                        <input type="text" id="id" placeholder="ID" name="loginID">
                         <input type="password" id="password" placeholder="PW">
                         <input type="submit" value="Login">
                     </form>

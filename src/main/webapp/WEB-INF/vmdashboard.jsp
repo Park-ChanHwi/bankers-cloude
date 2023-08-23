@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
 
+<html lang="ko">
 <head>
 	<title>CSS Template</title>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="../css/vmdashboard.css">
@@ -21,11 +23,8 @@
 <body>
 
 	<div class="container">
-
 		<div class="head">
-
 			<h1>
-
 				<p>BANKERS | SeoulMeta</p>
 			</h1>
 			<nav>
@@ -43,7 +42,6 @@
 			<div class="btn-group">
 				<button>VM 대시보드</button>
 				<button onclick="window.location.href='newcustumer.html'">모니터링</button>
-
 			</div>
 		</div>
 		<div class="body">
