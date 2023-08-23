@@ -26,7 +26,7 @@
                     <form action="/login" method="post">
                         <h2>Login</h2>
                         <input type="text" id="id" placeholder="ID" name="loginID">
-                        <input type="password" id="password" placeholder="PW">
+                        <input type="password" id="password" placeholder="PW" name="loginPW">
                         <input type="submit" value="Login">
                     </form>
                 </div>

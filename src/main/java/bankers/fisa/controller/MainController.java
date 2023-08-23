@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 public class MainController {
 	@GetMapping("/")
@@ -23,7 +25,9 @@ public class MainController {
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(@RequestParam("loginID") String loginID) {
+	public ModelAndView login(
+			@RequestParam("loginID") String loginID,
+			@RequestParam("loginPW") String loginPW) {
 		ModelAndView mv = new ModelAndView();
 		
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
@@ -34,6 +38,7 @@ public class MainController {
 
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("loginID", loginID);
+		parameters.add("loginPW", loginPW);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
@@ -43,7 +48,6 @@ public class MainController {
 		}else if(responseEntity.getBody().equals("false")){
 			mv.setViewName("fail");
 		}
-		System.out.println(responseEntity);
 		
 		return mv;
 	}
