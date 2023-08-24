@@ -49,24 +49,22 @@ th {
 }
 
 .scrolltable tbody td:nth-child(5) {
-	width: 70px;
+	width: 200px;
 }
 
 .scrolltable tbody td:nth-child(6) {
-	width: 300px;
+	width: 100px;
 }
 
 .scrolltable tbody td:nth-child(7) {
-	width: 100px;
+	width: 150px;
 }
 
-.scrolltable tbody td:nth-child(8) {
-	width: 100px;
+.btn {
+	width: 150px;
+
 }
 
-.scrolltable tbody td:nth-child(9) {
-	width: 70px;
-}
 
 .table-button {
 	position: absolute;
