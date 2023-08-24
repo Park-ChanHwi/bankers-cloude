@@ -53,8 +53,9 @@
 					</tbody>
 				</table>
 			</div>
-			<input type="button" class="table-button" " onclick=" location.href='../html/vmadd.html'" value=" 추가">
+			<input type="button" class="table-button" onclick="location.href='/vmadd'" value="추가">
 			<script>
+			
 				var vmname = decode("${vmname}");
 				var vmcatal = decode("${vmcatal}");
 				var vmaddress = decode("${vmaddress}");

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class MainController {
@@ -24,10 +28,21 @@ public class MainController {
 		return mv;
 	}
 	
-	@PostMapping("/login")
-	public ModelAndView loginPage(
+	@GetMapping("/vmadd")
+	public ModelAndView vmaddPage(@CookieValue("id") String id) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(id);
+		
+		mv.setViewName("vmadd");
+		return mv;
+	}
+	
+	@PostMapping("/dashboard")
+	public ModelAndView dashboardPage(
 			@RequestParam("loginID") String id,
-			@RequestParam("loginPW") String pw) {
+			@RequestParam("loginPW") String pw,
+			HttpServletResponse response) {
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -35,6 +50,13 @@ public class MainController {
 			mv.setViewName("fail");
 			return mv;
 		}
+		
+		Cookie cookie = new Cookie("id", id);
+		cookie.setDomain("localhost");
+		cookie.setPath("/");
+		cookie.setMaxAge(30*60);
+		cookie.setSecure(true);
+		response.addCookie(cookie);
 		
 		return goVMDashboard(id, pw, mv);
 	}

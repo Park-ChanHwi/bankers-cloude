@@ -23,7 +23,7 @@
                     <p>고성능 VM과 넉넉한 RAM, 충분한 저장용량까지 저렴한 가격에 이용해보세요.</p>
                 </div>
                 <div class="right">
-                    <form action="/login" method="post">
+                    <form action="/dashboard" method="post">
                         <h2>Login</h2>
                         <input type="text" id="id" placeholder="ID" name="loginID">
                         <input type="password" id="password" placeholder="PW" name="loginPW">
@@ -37,26 +37,6 @@
     <section id="contact">
         <div class="container">
             <div class="contact-me">
-               <!-- <div class="left">
-                    <div class="card">
-                        <div class="info-text">
-                            <h3>Phone</h3>
-                            <p>010-7552-1827</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="info-text">
-                            <h3>Email</h3>
-                            <p>godgunyoung110@naver.com</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="info-text">
-                            <h3>Address</h3>
-                            <p>서울시 마포구 상암동 1590</p>
-                        </div>
-                    </div>
-                </div>-->
                 <div class="right">
                     <form action="" method="">
                         <h2>CONTACT US</h2>
