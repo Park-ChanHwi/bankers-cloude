@@ -53,15 +53,12 @@ th {
 }
 
 .scrolltable tbody td:nth-child(6) {
-	width: 100px;
+	width: 200px;
 }
 
-.scrolltable tbody td:nth-child(7) {
-	width: 150px;
-}
 
 .btn {
-	width: 150px;
+	width: 100px;
 
 }
 

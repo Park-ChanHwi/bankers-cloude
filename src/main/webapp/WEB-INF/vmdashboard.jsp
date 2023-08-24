@@ -56,16 +56,16 @@
 			<input type="button" class="table-button" " onclick=" location.href='../html/vmadd.html'" value=" 추가">
 			<script>
 				var vmname = decode("${vmname}");
+				var vmcatal = decode("${vmcatal}");
 				var vmaddress = decode("${vmaddress}");
 				var vmstate = decode("${vmstate}");
-				var vmcatal = decode("${vmcatal}");
-				var vmcustempid = decode("${vmcustempid}");
+				var vmcustid = decode("${vmcustid}");
 				
 				for(var i = 0; i < vmname.length; i++){
-					addRow(i+1, vmname[i], vmaddress[i], vmstate[i], vmcatal[i], vmcustempid[i]);
+					addRow(i+1, vmname[i], vmaddress[i], vmstate[i], vmcatal[i], vmcustid[i]);
 				}
 				
-				function addRow(number, vmname, vmaddress, vmstate, vmcatal, vmcustempid) {
+				function addRow(number, vmname, vmaddress, vmstate, vmcatal, vmcustid) {
 		            var table = document.getElementById("vmTable");
 		            var newRow = document.createElement("tr");
 
@@ -74,10 +74,10 @@
 		            addColumn(newRow,vmstate);
 		            addColumn(newRow,vmcatal);
 		            addColumn(newRow,vmaddress);
-		            addColumn(newRow,vmcustempid);
+		            addColumn(newRow,vmcustid);
 		            
 		            var record = document.createElement("button");
-		            record.textContent = "관리하기"; // 셀 내용을 설정
+		            record.textContent = "관리하기";
 		            record.className="btn";
 		            newRow.appendChild(record);
 		            
@@ -86,7 +86,7 @@
 				
 				function addColumn(row, str){
 					var cell = document.createElement("td");
-		            cell.textContent = str; // 셀 내용을 설정
+		            cell.textContent = str;
 		            row.appendChild(cell);
 				}
 				

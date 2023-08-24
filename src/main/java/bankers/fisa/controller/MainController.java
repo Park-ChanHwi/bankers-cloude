@@ -18,82 +18,103 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class MainController {
 	
 	@GetMapping("/")
-	public ModelAndView index() {
+	public ModelAndView indexPage() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
 		return mv;
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(
-			@RequestParam("loginID") String loginID,
-			@RequestParam("loginPW") String loginPW) {
+	public ModelAndView loginPage(
+			@RequestParam("loginID") String id,
+			@RequestParam("loginPW") String pw) {
+		
 		ModelAndView mv = new ModelAndView();
-		URI loginUri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		
+		if(!login(id, pw)) {
+			mv.setViewName("fail");
+			return mv;
+		}
+		
+		return goVMDashboard(id, pw, mv);
+	}
+
+	private ModelAndView goVMDashboard(String id, String pw, ModelAndView mv) {
+		
+		ArrayList<String> vmname = new ArrayList<String>();
+		ArrayList<String> vmaddress = new ArrayList<String>();
+		ArrayList<String> vmstate = new ArrayList<String>();
+		ArrayList<String> vmcatal = new ArrayList<String>();
+		ArrayList<String> vmcustid = new ArrayList<String>();
+			
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/controller/vmlist")
+				.encode()
+				.build()
+				.toUri();
+			
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("loginID", id);
+		parameters.add("loginPW", pw);
+			
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
+			
+		String[] vmlist = responseEntity.getBody().toString().split(",");
+		for(int i = 0; i < vmlist.length; i++) {
+			String[] vmInfo = vmlist[i].split("_");
+			
+			vmname.add(vmInfo[2]);
+			vmcatal.add(vmInfo[3]);
+			vmaddress.add(vmInfo[4]);
+			vmstate.add(vmInfo[5]);
+			vmcustid.add(getCustEmp(vmInfo[6]).split("_")[3]);
+		}
+		mv.addObject("vmname", vmname);
+		mv.addObject("vmcatal", vmcatal);
+		mv.addObject("vmaddress", vmaddress);
+		mv.addObject("vmstate", vmstate);
+		mv.addObject("vmcustid", vmcustid);
+		
+		mv.setViewName("vmdashboard");
+		
+		return mv;
+	}
+	
+	private String getCustEmp(String custEmpNumber) {
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/controller/custemp")
+				.encode()
+				.build()
+				.toUri();
+		
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("custEmpNumber", custEmpNumber);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
+		
+		return responseEntity.getBody();
+	}
+	
+	private boolean login(String id, String pw) {
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
 				.path("/controller/login")
 				.encode()
 				.build()
 				.toUri();
 
-		MultiValueMap<String, String> loginParameters = new LinkedMultiValueMap<>();
-		loginParameters.add("loginID", loginID);
-		loginParameters.add("loginPW", loginPW);
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("loginID", id);
+		parameters.add("loginPW", pw);
 		
-		RestTemplate loginRestTemplate = new RestTemplate();
-		ResponseEntity<String> loginResponseEntity = loginRestTemplate.postForEntity(loginUri, loginParameters, String.class);
-		if(loginResponseEntity.getBody().equals("true")) {
-			mv.setViewName("vmdashboard");
-			ArrayList<String> vmname = new ArrayList<String>();
-			ArrayList<String> vmaddress = new ArrayList<String>();
-			ArrayList<String> vmstate = new ArrayList<String>();
-			ArrayList<String> vmcatal = new ArrayList<String>();
-			ArrayList<String> vmcustempid = new ArrayList<String>();
-			
-			URI vmUri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-					.path("/controller/vmlist")
-					.encode()
-					.build()
-					.toUri();
-			
-			MultiValueMap<String, String> vmParameters = new LinkedMultiValueMap<>();
-			vmParameters.add("loginID", loginID);
-			vmParameters.add("loginPW", loginPW);
-			
-			RestTemplate vmRestTemplate = new RestTemplate();
-			ResponseEntity<String> responseEntity = vmRestTemplate.postForEntity(vmUri, vmParameters, String.class);
-			String[] strArr2 = responseEntity.getBody().toString().split(",");
-			for(String str : strArr2) {
-				String[] strArr3 = str.split("_");
-				vmname.add(strArr3[2]);
-				vmaddress.add(strArr3[4]);
-				vmstate.add(strArr3[5]);
-				vmcatal.add(strArr3[3]);
-				
-				
-				URI custempUri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-						.path("/controller/custemp")
-						.encode()
-						.build()
-						.toUri();
-				
-				MultiValueMap<String, String> custempParameters = new LinkedMultiValueMap<>();
-				custempParameters.add("custEmpNumber", strArr3[6]);
-				
-				RestTemplate custempRestTemplate = new RestTemplate();
-				ResponseEntity<String> responseEntity2 = custempRestTemplate.postForEntity(custempUri, custempParameters, String.class);
-				
-				String[] strArr7 = responseEntity2.getBody().split("_");
-				vmcustempid.add(strArr7[3]);
-			}
-			mv.addObject("vmname", vmname);
-			mv.addObject("vmaddress", vmaddress);
-			mv.addObject("vmstate", vmstate);
-			mv.addObject("vmcatal", vmcatal);
-			mv.addObject("vmcustempid", vmcustempid);
-			
-		}else if(loginResponseEntity.getBody().equals("false")){
-			mv.setViewName("fail");
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
+		
+		if(responseEntity.getBody().equals("true")) {
+			return true;
+		}else {
+			return false;
 		}
-		return mv;
 	}
 }
