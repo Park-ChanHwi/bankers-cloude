@@ -46,7 +46,7 @@ public class MainController {
 		parameters.add("vmnumber", vmnumber);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForEntity(uri, parameters, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
 		return mv;
 	}
 	
