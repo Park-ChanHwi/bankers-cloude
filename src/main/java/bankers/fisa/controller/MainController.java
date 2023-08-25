@@ -8,6 +8,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,14 +28,56 @@ public class MainController {
 		mv.setViewName("index");
 		return mv;
 	}
+
+	@GetMapping("/vmmanagement/vmnumber={vmnumber}")
+	public ModelAndView vmmanagement(
+			@PathVariable String vmnumber,
+			@CookieValue("id") String id) {
+		ModelAndView mv = new ModelAndView("vmmanagement");
+		
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/controller/getvm")
+				.encode()
+				.build()
+				.toUri();
+
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("id", id);
+		parameters.add("vmnumber", vmnumber);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.postForEntity(uri, parameters, String.class);
+		return mv;
+	}
 	
 	@GetMapping("/vmadd")
 	public ModelAndView vmaddPage(@CookieValue("id") String id) {
+		ModelAndView mv = new ModelAndView("vmadd");
+		return mv;
+	}
+	
+	@PostMapping("/vmcreate")
+	public ModelAndView vmcreatePage(
+			@RequestParam("vmname") String vmname,
+			@RequestParam("catalType") String catalType,
+			@CookieValue("id") String id) {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println(id);
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/controller/vmcreate")
+				.encode()
+				.build()
+				.toUri();
+
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("vmname", vmname);
+		parameters.add("catalType", catalType);
+		parameters.add("creater", id);
 		
-		mv.setViewName("vmadd");
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.postForEntity(uri, parameters, String.class);
+		
+		mv.setViewName("redirect:/dashboard");
 		return mv;
 	}
 	
@@ -46,9 +89,7 @@ public class MainController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("들어옴");
 		if(!login(id, pw)) {
-			System.out.println("로그인 틀림");
 			mv.setViewName("fail");
 			return mv;
 		}
@@ -56,25 +97,24 @@ public class MainController {
 		Cookie cookie = new Cookie("id", id);
 		cookie.setDomain("localhost");
 		cookie.setPath("/");
-		cookie.setMaxAge(30*60);
+		cookie.setMaxAge(60*60);
 		cookie.setSecure(true);
 		response.addCookie(cookie);
 		
-		mv = dashboardPage(id);
+		mv.setViewName("redirect:/dashboard");
 		
 		return mv;
 	}
 	
-	@PostMapping("/dashboard")
+	@GetMapping("/dashboard")
 	public ModelAndView dashboardPage(@CookieValue("id") String id) {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		return goVMDashboard(id, mv);
+		return goVMDashboard(id, new ModelAndView());
 	}
 
 	private ModelAndView goVMDashboard(String id, ModelAndView mv) {
-		
+
+		ArrayList<String> vmnumber = new ArrayList<String>();
+		ArrayList<String> vmcreatedate = new ArrayList<String>();
 		ArrayList<String> vmname = new ArrayList<String>();
 		ArrayList<String> vmaddress = new ArrayList<String>();
 		ArrayList<String> vmstate = new ArrayList<String>();
@@ -97,12 +137,16 @@ public class MainController {
 		for(int i = 0; i < vmlist.length; i++) {
 			String[] vmInfo = vmlist[i].split("_");
 			
+			vmnumber.add(vmInfo[0]);
+			vmcreatedate.add(vmInfo[1]);
 			vmname.add(vmInfo[2]);
 			vmcatal.add(vmInfo[3]);
 			vmaddress.add(vmInfo[4]);
 			vmstate.add(vmInfo[5]);
 			vmcustid.add(getCustEmp(vmInfo[6]).split("_")[3]);
 		}
+		mv.addObject("vmnumber", vmnumber);
+		mv.addObject("vmcreatedate", vmcreatedate);
 		mv.addObject("vmname", vmname);
 		mv.addObject("vmcatal", vmcatal);
 		mv.addObject("vmaddress", vmaddress);

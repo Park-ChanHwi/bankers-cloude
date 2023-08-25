@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/sidebar.css">
 <link rel="stylesheet" href="../css/style.css">
-<link rel="icon" type="image/x-icon"
-	href="../images/favicon/favicon.ico">
 </head>
 <body>
 	<div class="container">
@@ -56,6 +54,8 @@
 			<input type="button" class="table-button" onclick="location.href='/vmadd'" value="추가">
 			<script>
 			
+				var vmnumber = decode("${vmnumber}");
+				var vmcreatedate = decode("${vmcreatedate}");
 				var vmname = decode("${vmname}");
 				var vmcatal = decode("${vmcatal}");
 				var vmaddress = decode("${vmaddress}");
@@ -63,10 +63,10 @@
 				var vmcustid = decode("${vmcustid}");
 				
 				for(var i = 0; i < vmname.length; i++){
-					addRow(i+1, vmname[i], vmaddress[i], vmstate[i], vmcatal[i], vmcustid[i]);
+					addRow(i+1, vmnumber[i], vmcreatedate[i], vmname[i], vmaddress[i], vmstate[i], vmcatal[i], vmcustid[i]);
 				}
 				
-				function addRow(number, vmname, vmaddress, vmstate, vmcatal, vmcustid) {
+				function addRow(number, vmnumber, vmcreatedate, vmname, vmaddress, vmstate, vmcatal, vmcustid) {
 		            var table = document.getElementById("vmTable");
 		            var newRow = document.createElement("tr");
 
@@ -81,6 +81,11 @@
 		            record.textContent = "관리하기";
 		            record.className="btn";
 		            newRow.appendChild(record);
+
+		            record.onclick = function(){
+		            	location.href="vmmanagement/vmnumber="+vmnumber;
+		            	console.log(vmnumber + "," + vmcreatedate);
+		            }
 		            
 		            table.getElementsByTagName('tbody')[0].appendChild(newRow);
 		        }

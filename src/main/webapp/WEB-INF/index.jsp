@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bankers</title>
 	<link rel="stylesheet" href="../css/index.css">
-    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
 </head>
 
 <div class="vl"></div>
