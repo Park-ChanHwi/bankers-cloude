@@ -38,15 +38,17 @@ public class MainController {
 		return mv;
 	}
 	
-	@PostMapping("/dashboard")
-	public ModelAndView dashboardPage(
+	@PostMapping("/login")
+	public ModelAndView loginPage(
 			@RequestParam("loginID") String id,
 			@RequestParam("loginPW") String pw,
 			HttpServletResponse response) {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("들어옴");
 		if(!login(id, pw)) {
+			System.out.println("로그인 틀림");
 			mv.setViewName("fail");
 			return mv;
 		}
@@ -58,10 +60,20 @@ public class MainController {
 		cookie.setSecure(true);
 		response.addCookie(cookie);
 		
-		return goVMDashboard(id, pw, mv);
+		mv = dashboardPage(id);
+		
+		return mv;
+	}
+	
+	@PostMapping("/dashboard")
+	public ModelAndView dashboardPage(@CookieValue("id") String id) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		return goVMDashboard(id, mv);
 	}
 
-	private ModelAndView goVMDashboard(String id, String pw, ModelAndView mv) {
+	private ModelAndView goVMDashboard(String id, ModelAndView mv) {
 		
 		ArrayList<String> vmname = new ArrayList<String>();
 		ArrayList<String> vmaddress = new ArrayList<String>();
@@ -76,8 +88,7 @@ public class MainController {
 				.toUri();
 			
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("loginID", id);
-		parameters.add("loginPW", pw);
+		parameters.add("id", id);
 			
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);

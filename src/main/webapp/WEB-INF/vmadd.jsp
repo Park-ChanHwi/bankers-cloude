@@ -52,39 +52,36 @@
 						<option>D</option>
 						<option>E</option>
 					</select>
-					<script>
-						function chageVMName(){
-						    var vmname = document.getElementById("inputVMName").value;
-						    document.getElementById("vmname").innerHTML = "ID: " + vmname;
-						}
-					
-						function chageCatalType(){
-						    var langSelect = document.getElementById("catalType");
-						     
-						    var selectText = langSelect.options[langSelect.selectedIndex].text;
-						    
-						    if(selectText == "A"){
-							    document.getElementById("catalTypeInfo").innerHTML = 
-							    	"=유형 A=<br>type: mini<br>cpu: 1개<br>ram: 2GB<br>storage: 20GB<br>";
-						    }else if(selectText == "B"){
-							    document.getElementById("catalTypeInfo").innerHTML = 
-							    	"=유형 B=<br>type: small<br>cpu: 1개<br>ram: 2GB<br>storage: 40GB<br>";
-						    }else if(selectText == "C"){
-							    document.getElementById("catalTypeInfo").innerHTML = 
-							    	"=유형 C=<br>type: medium<br>cpu: 2개<br>ram: 4GB<br>storage: 50GB<br>";
-						    }else if(selectText == "D"){
-							    document.getElementById("catalTypeInfo").innerHTML = 
-							    	"=유형 D=<br>type: big<br>cpu: 2개<br>ram: 8GB<br>storage: 100GB<br>";
-						    }else if(selectText == "E"){
-							    document.getElementById("catalTypeInfo").innerHTML = 
-							    	"=유형 E=<br>type: super<br>cpu: 2개<br>ram: 16GB<br>storage: 200GB<br>";
-						    }
-						}
-					</script>
 				<div class="btn-group">
 					<input type="button" value="취소">
 					<input type="button" value="생성">
 				</div>
+				<script>
+					function chageVMName(){
+						var vmname = document.getElementById("inputVMName").value;
+						document.getElementById("vmname").innerHTML = "ID: " + vmname;
+					}
+					function chageCatalType(){
+						var langSelect = document.getElementById("catalType");
+						var selectText = langSelect.options[langSelect.selectedIndex].text;
+						if(selectText == "A"){
+							document.getElementById("catalTypeInfo").innerHTML = 
+								"=유형 A=<br>type: mini<br>cpu: 1개<br>ram: 2GB<br>storage: 20GB<br>";
+						}else if(selectText == "B"){
+							document.getElementById("catalTypeInfo").innerHTML = 
+								"=유형 B=<br>type: small<br>cpu: 1개<br>ram: 2GB<br>storage: 40GB<br>";
+						}else if(selectText == "C"){
+							document.getElementById("catalTypeInfo").innerHTML = 
+								"=유형 C=<br>type: medium<br>cpu: 2개<br>ram: 4GB<br>storage: 50GB<br>";
+						}else if(selectText == "D"){
+							document.getElementById("catalTypeInfo").innerHTML = 
+								"=유형 D=<br>type: big<br>cpu: 2개<br>ram: 8GB<br>storage: 100GB<br>";
+						}else if(selectText == "E"){
+							document.getElementById("catalTypeInfo").innerHTML = 
+								"=유형 E=<br>type: super<br>cpu: 2개<br>ram: 16GB<br>storage: 200GB<br>";
+						}
+					}
+				</script>
 			</div>
 			<div class="right">
 				<p>=명세서=</p>
