@@ -36,7 +36,7 @@ public class MainController {
 		ModelAndView mv = new ModelAndView("vmmanagement");
 		
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/controller/getvm")
+				.path("/center/getvm")
 				.encode()
 				.build()
 				.toUri();
@@ -64,7 +64,7 @@ public class MainController {
 		ModelAndView mv = new ModelAndView();
 		
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/controller/vmcreate")
+				.path("/center/vmcreate")
 				.encode()
 				.build()
 				.toUri();
@@ -122,7 +122,7 @@ public class MainController {
 		ArrayList<String> vmcustid = new ArrayList<String>();
 			
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/controller/vmlist")
+				.path("/center/vmlist")
 				.encode()
 				.build()
 				.toUri();
@@ -160,7 +160,7 @@ public class MainController {
 	
 	private String getCustEmp(String custEmpNumber) {
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/controller/custemp")
+				.path("/cneter/custemp")
 				.encode()
 				.build()
 				.toUri();
@@ -176,7 +176,7 @@ public class MainController {
 	
 	private boolean login(String id, String pw) {
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/controller/login")
+				.path("/center/login")
 				.encode()
 				.build()
 				.toUri();
