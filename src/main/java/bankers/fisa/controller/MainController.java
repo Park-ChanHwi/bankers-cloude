@@ -340,6 +340,8 @@ public class MainController {
 	
 	private ModelAndView goVMDashboard(String id, ModelAndView mv) {
 		
+		mv.addObject("id", id);
+		mv.addObject("norecord", "false");
 		mv.setViewName("vmdashboard");
 		ArrayList<String> vmnumber = new ArrayList<String>();
 		ArrayList<String> vmcreatedate = new ArrayList<String>();
@@ -361,6 +363,7 @@ public class MainController {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
 		if(responseEntity.getBody() == null) {
+			mv.addObject("norecord", "true");
 			return mv;
 		}
 		
@@ -375,7 +378,6 @@ public class MainController {
 			vmstate.add(vmInfo[5]);
 			vmcustid.add(getCustEmp(vmInfo[6]).split("_")[3]);	
 		}
-		
 		mv.addObject("vmnumber", vmnumber);
 		mv.addObject("vmcreatedate", vmcreatedate);
 		mv.addObject("vmname", vmname);
