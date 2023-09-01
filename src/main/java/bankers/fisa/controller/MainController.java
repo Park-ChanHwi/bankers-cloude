@@ -278,12 +278,33 @@ public class MainController {
 			return mv;
 		}
 		
-		Cookie cookie = new Cookie("id", id);
+		URI uri_pos = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/center/custpos")
+				.encode()
+				.build()
+				.toUri();
+		
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("custId", id);
+		
+		RestTemplate restTemplatePos = new RestTemplate();
+		ResponseEntity<String> responseEntityPos = restTemplatePos.postForEntity(uri_pos, parameters, String.class);
+		String pos = responseEntityPos.getBody();
+		System.out.println(pos);
+		
+		Cookie idCookie = new Cookie("id", id);
+		idCookie.setDomain("localhost");
+		idCookie.setPath("/");
+		idCookie.setMaxAge(COOKIE_TIME);
+		idCookie.setSecure(true);
+		idCookie.addCookie(cookie);
+		
+		Cookie posCookie = new Cookie("pos", pos);
 		cookie.setDomain("localhost");
 		cookie.setPath("/");
 		cookie.setMaxAge(COOKIE_TIME);
 		cookie.setSecure(true);
-		response.addCookie(cookie);
+		response.addCookie(posCookie);
 		
 		mv.setViewName("redirect:/dashboard");
 		
