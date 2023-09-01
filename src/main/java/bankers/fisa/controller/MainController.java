@@ -160,7 +160,7 @@ public class MainController {
 	
 	private String getCustEmp(String custEmpNumber) {
 		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/cneter/custemp")
+				.path("/center/custemp")
 				.encode()
 				.build()
 				.toUri();
