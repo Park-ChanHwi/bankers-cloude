@@ -271,26 +271,25 @@ public class MainController {
 			@RequestParam("loginID") String id,
 			@RequestParam("loginPW") String pw,
 			HttpServletResponse response) {
-		
 		ModelAndView mv = new ModelAndView();
 		if(!login(id, pw)) {
 			mv.setViewName("fail");
 			return mv;
 		}
 		
-		URI uri_pos = UriComponentsBuilder.fromUriString("http://localhost:7070")
-				.path("/center/custpos")
-				.encode()
-				.build()
-				.toUri();
-		
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-		parameters.add("custId", id);
-		
-		RestTemplate restTemplatePos = new RestTemplate();
-		ResponseEntity<String> responseEntityPos = restTemplatePos.postForEntity(uri_pos, parameters, String.class);
-		String pos = responseEntityPos.getBody();
-		System.out.println(pos);
+//		URI uri_pos = UriComponentsBuilder.fromUriString("http://localhost:7070")
+//				.path("/center/custpos")
+//				.encode()
+//				.build()
+//				.toUri();
+//		
+//		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+//		parameters.add("custId", id);
+//		
+//		RestTemplate restTemplatePos = new RestTemplate();
+//		ResponseEntity<String> responseEntityPos = restTemplatePos.postForEntity(uri_pos, parameters, String.class);
+//		String pos = responseEntityPos.getBody();
+//		System.out.println(pos);
 		
 		Cookie idCookie = new Cookie("id", id);
 		idCookie.setDomain("localhost");
@@ -299,12 +298,12 @@ public class MainController {
 		idCookie.setSecure(true);
 		response.addCookie(idCookie);
 		
-		Cookie posCookie = new Cookie("pos", pos);
-		posCookie.setDomain("localhost");
-		posCookie.setPath("/");
-		posCookie.setMaxAge(COOKIE_TIME);
-		posCookie.setSecure(true);
-		response.addCookie(posCookie);
+//		Cookie posCookie = new Cookie("pos", pos);
+//		posCookie.setDomain("localhost");
+//		posCookie.setPath("/");
+//		posCookie.setMaxAge(COOKIE_TIME);
+//		posCookie.setSecure(true);
+//		response.addCookie(posCookie);
 		
 		mv.setViewName("redirect:/dashboard");
 		
