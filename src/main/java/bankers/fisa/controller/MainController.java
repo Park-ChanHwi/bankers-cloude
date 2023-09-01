@@ -297,13 +297,13 @@ public class MainController {
 		idCookie.setPath("/");
 		idCookie.setMaxAge(COOKIE_TIME);
 		idCookie.setSecure(true);
-		idCookie.addCookie(cookie);
+		response.addCookie(idCookie);
 		
 		Cookie posCookie = new Cookie("pos", pos);
-		cookie.setDomain("localhost");
-		cookie.setPath("/");
-		cookie.setMaxAge(COOKIE_TIME);
-		cookie.setSecure(true);
+		posCookie.setDomain("localhost");
+		posCookie.setPath("/");
+		posCookie.setMaxAge(COOKIE_TIME);
+		posCookie.setSecure(true);
 		response.addCookie(posCookie);
 		
 		mv.setViewName("redirect:/dashboard");
