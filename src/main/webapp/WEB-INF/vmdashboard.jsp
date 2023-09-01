@@ -29,7 +29,7 @@
 		<div class="sidebar">
 			<div class="btn-group">
 				<button>VM 대시보드</button>
-				<button onclick="window.location.href=''">모니터링</button>
+				<button onclick="location.href='/vmmonitoring'">모니터링</button>
 			</div>
 		</div>
 		<div class="body">

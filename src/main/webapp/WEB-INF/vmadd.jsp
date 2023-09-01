@@ -19,7 +19,7 @@
 	<div class="container">
 		<div class="head">
 			<h1>
-				<p>BANKERS | SeoulMeta</p>
+				BANKERS | SeoulMeta
 			</h1>
 			<nav>
 				<ul>
@@ -34,8 +34,8 @@
 		</div>
 		<div class="sidebar">
 			<div class="btn-group">
-				<button onclick="window.location.href='vmdashboard.html'">VM 대시보드</button>
-				<button>모니터링</button>
+				<button onclick="location.href='/dashboard'">VM 대시보드</button>
+				<button onclick="location.href='/vmmonitoring'">모니터링</button>
 			</div>
 		</div>
 		<div class="body">
@@ -72,7 +72,7 @@
 			<script>
 				function chageVMName(){
 					var vmname = document.getElementById("inputVMName").value;
-					document.getElementById("vmname").innerHTML = "ID: " + vmname;
+					document.getElementById("vmname").innerHTML = "VM 이름: " + vmname;
 				}
 				function chageCatalType(){
 					var catalType = document.getElementById("catalType");
@@ -91,8 +91,9 @@
 							"=유형 D=<br>type: big<br>cpu: 2개<br>ram: 8GB<br>storage: 100GB<br>";
 					}else if(catalTypeValue == "E"){
 						document.getElementById("catalTypeInfo").innerHTML = 
-							"=유형 E=<br>type: super<br>cpu: 2개<br>ram: 16GB<br>storage: 200GB<br>";						}
+							"=유형 E=<br>type: super<br>cpu: 2개<br>ram: 16GB<br>storage: 200GB<br>";
 					}
+				}
 			</script>
 		</div>
 	</div>
