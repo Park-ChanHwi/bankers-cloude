@@ -76,7 +76,7 @@
                     </button>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">대시보드</h1>
                     
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -164,7 +164,7 @@
                 </div>
             </div>
             <!-- End of Main Content -->
-
+			
             <!-- Footer -->
             <footer class="sticky-footer bg-footer">
                 <div class="container my-auto">
@@ -236,45 +236,78 @@
 		addColumn(newRow,vmaddress);
 		addColumn(newRow,vmcustid);
 			            
-		var recordbtn = document.createElement("a");
-		recordbtn.setAttribute('class', 'btn btn-secondary btn-icon-split');
-		recordbtn.setAttribute('href', 'vmmanagement/vmnumber='+vmnumber);
+		if(Number(vmnumber) < 90000){
+			var recordbtn = document.createElement("a");
+			recordbtn.setAttribute('class', 'btn btn-secondary btn-icon-split');
+			recordbtn.setAttribute('href', 'vmmanagement/vmnumber='+vmnumber);
+				
+			var iconbox = document.createElement("span");
+			iconbox.setAttribute('class', 'icon text-white-50');
+				
+			var icon = document.createElement("span");
+			icon.setAttribute('class', 'fas fa-arrow-right');
+				
+			var btntext = document.createElement("span");
+			btntext.setAttribute('class', 'text');
+			btntext.innerHTML = '관리하기';
 			
-		var iconbox = document.createElement("span");
-		iconbox.setAttribute('class', 'icon text-white-50');
+			iconbox.appendChild(icon);
+			recordbtn.appendChild(iconbox);
+			recordbtn.appendChild(btntext);
+				
+			var cell = document.createElement("td");
+			cell.appendChild(recordbtn);
+			newRow.appendChild(cell);
+		}else{
+			var btntext = document.createElement("span");
+			btntext.setAttribute('class', 'text-loading');
 			
-		var icon = document.createElement("span");
-		icon.setAttribute('class', 'fas fa-arrow-right');
+			var cell = document.createElement("td");
+			cell.appendChild(btntext);
+			newRow.appendChild(cell);
 			
-		var btntext = document.createElement("span");
-		btntext.setAttribute('class', 'text');
-		btntext.innerHTML = '관리하기';
+			var interval = setInterval(function() {
+				loadingCheck(xhttp, vmnumber);
+			}, 1000)
+			
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() {
+				console.log(this.responseText);
+				if(this.responseText == 'true'){
+					location.reload(true);
+					clearInterval(interval);
+				}
+			}
+		}
 		
-		iconbox.appendChild(icon);
-		recordbtn.appendChild(iconbox);
-		recordbtn.appendChild(btntext);
-			
-		var cell = document.createElement("td");
-		cell.appendChild(recordbtn);
-		newRow.appendChild(cell);
-		
-		//recordbtn
-		// newRow.appendChild(recordbtn);
-	
-			//<a href="#" class="btn btn-secondary btn-icon-split">
-            //<span class="icon text-white-50">
-            //    <i class="fas fa-arrow-right"></i>
-            //</span>
-            //<span class="text">Split Button Secondary</span>
-        	//</a>
-			
-			
-			//recordmanagementbutton.onclick = function(){
-			//	location.href="vmmanagement/vmnumber="+vmnumber;
-			//	console.log(vmnumber + "," + vmcreatedate);
-			//}
-			            
 		table.getElementsByTagName('tbody')[0].appendChild(newRow);
+	}
+	
+	function loadingCheck(xhttp, vmnumber){
+		xhttp.open("GET", '/loadingcheck/'+vmnumber, true);
+		xhttp.send();
+	}
+	
+	setInterval(function() {
+		loadingText();
+	}, 500)
+	
+	var loadingcounter = 0;
+	var loadingtext = '준 비 중 . . .';
+	
+	function loadingText(){
+		var ltext = document.getElementsByClassName('text-loading');
+		
+		for(var i = 0; i < ltext.length; i++){
+			if(typeof ltext[i].innerText != "undefined"){
+				ltext[i].innerText = loadingtext.substr(0, loadingcounter - 1);
+			}
+		}
+		
+		loadingcounter++;
+		if(loadingcounter > loadingtext.length + 2){
+			loadingcounter = 0;
+		}
 	}
 				
 	function addColumn(row, str){
@@ -289,6 +322,7 @@
 		var strsplit = strslice.split(',');
 		return strsplit;
 	}
+	
 	</script>
 
 </body>
