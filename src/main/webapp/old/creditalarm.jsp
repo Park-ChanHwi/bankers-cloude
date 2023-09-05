@@ -1,0 +1,90 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="../css/vmmanagement.css">
+
+<link rel="stylesheet" href="../css/hearder.css">
+<link rel="stylesheet" href="../css/body.css ">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/sidebar.css">
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="icon" type="image/x-icon"
+	href="../images/favicon/favicon.ico">
+<style>
+</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="head">
+			<h1>
+				<p>BANKERS | SeoulMeta</p>
+			</h1>
+			<nav>
+				<ul>
+					<li><a>USER</a></li>
+					<li><a href="index.html">로그아웃</a></li>
+				</ul>
+			</nav>
+		</div>
+		<c:choose>
+			<div class="sidebar">
+				<div class="btn-group">
+					<button onclick="location.href='vmdashboard.html'">VM 대시보드</button>
+					<button>모니터링</button>
+					<c:when test="${pos eq 'admin'}">
+						<button>크레딧 알림</button>
+						<button>사원 관리</button>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</div>
+			</div>
+		</c:choose>
+
+		<div class="body">
+			<h2>크레딧 알림</h2>
+
+			<div class="box1">
+				<ul>
+					<li>보유 크레딧 / 최대 크레딧 <input type="text" /></li>
+					<li><input type="text" /></li>
+					<br>
+					<li>알람 사용</li>
+					<li><label> 1% <input type="checkbox" />
+					</label></li>
+					<li><label> 5% <input type="checkbox" />
+					</label></li>
+					<li><label> 50% <input type="checkbox" />
+					</label></li>
+					<li>사용자 지정 <input type="text" /></li>
+					<li>알림 받을 이메일 <input type="text" /></li>
+					<br>
+					<br>
+					<br>
+					<p>
+						&nbsp;&nbsp;&nbsp;알림 사용 여부&nbsp<input type="checkbox" name="xxx"
+							value="yyy"> &nbsp<input type="submit" value="취소"
+							onclick="location.href=''"> &nbsp<input type="reset"
+							value="수정">
+				</ul>
+
+			</div>
+		</div>
+		<div class="footer">
+			<p>BANKERS. fisabankers@gmail.com tel.010-XXXX-XXXX</p>
+			<p>서울특별시 마포구 월드컵북로 434 (상암동, 상암 IT Tower 6층)</p>
+		</div>
+	</div>
+</body>
+
+</html>
