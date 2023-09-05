@@ -32,6 +32,47 @@ public class MainController {
 		return mv;
 	}
 	
+	@GetMapping("/vminfo/{vmnumber}")
+	public ModelAndView vminfoPage(@PathVariable String vmnumber) {
+		ModelAndView mv = new ModelAndView("vminfo");
+		
+		String createDate = new String();
+		String vmName = new String();
+		String vmCatal = new String();
+		String vmAddress = new String();
+		String vmState = new String();
+		
+		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+				.path("/center/getlog")
+				.encode()
+				.build()
+				.toUri();
+			
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("vmnumber", vmnumber);
+			
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
+		
+		for(String log : responseEntity.getBody().toString().split(",")) {
+			String[] logInfo = log.split("_");
+			
+			createDate += logInfo[1] + "_";
+			vmName += logInfo[2] + "_";
+			vmCatal += logInfo[3] + "_";
+			vmAddress += logInfo[4] + "_";
+			vmState += logInfo[5] + "_";
+		}
+		
+		mv.addObject("createdate", createDate.substring(0, createDate.length() - 1));
+		mv.addObject("vmname", vmName.substring(0, vmName.length() - 1));
+		mv.addObject("vmcatal", vmCatal.substring(0, vmCatal.length() - 1));
+		mv.addObject("vmaddress", vmAddress.substring(0, vmAddress.length() - 1));
+		mv.addObject("vmstate", vmState.substring(0, vmState.length() - 1));
+		
+		return mv;
+	}
+	
 	@GetMapping("/loadingcheck/{vmnumber}")
 	public String loadingcheck(@PathVariable String vmnumber) {
 		
@@ -67,9 +108,9 @@ public class MainController {
 		
 		String[] vmInfo = responseEntity.getBody().toString().split("_");
 		
-		System.out.println(responseEntity.getBody().toString());
-		
-		String vmcpu = Integer.parseInt(vmInfo[1].substring(2, 4)) + "." + vmInfo[1].substring(4, 5) + "%";
+		double d = Double.parseDouble(vmInfo[1]) * 1000;
+		d = Math.floor(d);
+		String vmcpu = (d / 10) + "%";
 		String vmram = vmLoadDecode(vmInfo[2], vmInfo[3]);
 		String vmstorage = vmLoadDecode(vmInfo[4], vmInfo[5]);
 		
@@ -158,10 +199,6 @@ public class MainController {
 		float h = Math.round((total / 1024) * 100);
 		
 		return (load / 10) + "%@" + (h / 100) + "GB";
-	}
-	
-	private String vmStorageLoad() {
-		return "";
 	}
 	
 	@GetMapping("/vmupdate")
@@ -306,7 +343,6 @@ public class MainController {
 		
     	RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForEntity(uri, parameters, String.class);
-		
 		mv.setViewName("redirect:/dashboard");
 		return mv;
 	}
