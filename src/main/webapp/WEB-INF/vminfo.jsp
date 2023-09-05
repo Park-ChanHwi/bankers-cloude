@@ -21,31 +21,6 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.css" rel="stylesheet">
     
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      
-      function drawChart() {
-          var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses'],
-            ['2004',  1000,      400],
-            ['2005',  1170,      460],
-            ['2006',  660,       1120],
-            ['2007',  1030,      540]
-          ]);
-
-          var options = {
-            title: 'Company Performance',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-          };
-
-          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-          chart.draw(data, options);
-        }
-    </script>
 </head>
 
 <body id="page-top">
@@ -164,14 +139,7 @@
 	                        <table>
 							    <tr>
 							        <td style="width:40%" valign="top" id='infotext'>
-							        	vm이름 : <br>
-							        	ID : <br>
-							        	접속주소 : <br>
-							        	=유형=<br>
-							        	type<br>
-							        	cpu<br>
-							        	ram<br>
-							        	storage<br>
+							        	VM 이름 : <br>
 									</td>
 							        <td>
 	   									<div id="curve_chart" style="width: 400px; height: 200px"></div>
@@ -277,8 +245,21 @@
     var infotext = document.getElementById("infotext");
     infotext.innerHTML = 'VM 이름 : ' + vmname[vmname.length - 1] + '<br>';
     infotext.innerHTML += 'ID : ' + ${vmnumber} + '<br>';
-	
+    infotext.innerHTML += '접속 주소 : ' + vmaddress[vmaddress.length - 1] + '<br>';
     
+    var catal = vmcatal[vmcatal.length - 1];
+    
+    if (catal == "A") {
+    	infotext.innerHTML += "=유형 A=<br>type: mini<br>cpu: 1개<br>ram: 2GB<br>storage: 20GB<br>";
+	} else if (catal == "B") {
+		infotext.innerHTML += "=유형 B=<br>type: small<br>cpu: 1개<br>ram: 2GB<br>storage: 40GB<br>";
+	} else if (catal == "C") {
+		infotext.innerHTML += "=유형 C=<br>type: medium<br>cpu: 2개<br>ram: 4GB<br>storage: 50GB<br>";
+	} else if (catal == "D") {
+		infotext.innerHTML += "=유형 D=<br>type: big<br>cpu: 2개<br>ram: 8GB<br>storage: 100GB<br>";
+	} else if (catal == "E") {
+		infotext.innerHTML += "=유형 E=<br>type: super<br>cpu: 2개<br>ram: 16GB<br>storage: 200GB<br>";
+	}
     
 	function addColumn(row, str){
 		var cell = document.createElement("td");
@@ -290,7 +271,118 @@
     	var strsplit = str.split('_');
 		return strsplit;
     }
-    
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      var cpu1 = 0;
+      var cpu2 = 0;
+      var cpu3 = 0;
+      var cpu4 = 0;
+      var cpu5 = 0;
+      var cpu6 = 0;
+      var cpu7 = 0;
+      var cpu8 = 0;
+      var cpu9 = 0;
+      var cpu10 = 0;
+      
+      var ram1 = 0;
+      var ram2 = 0;
+      var ram3 = 0;
+      var ram4 = 0;
+      var ram5 = 0;
+      var ram6 = 0;
+      var ram7 = 0;
+      var ram8 = 0;
+      var ram9 = 0;
+      var ram10 = 0;
+      
+      var storage1 = 0;
+      var storage2 = 0;
+      var storage3 = 0;
+      var storage4 = 0;
+      var storage5 = 0;
+      var storage6 = 0;
+      var storage7 = 0;
+      var storage8 = 0;
+      var storage9 = 0;
+      var storage10 = 0;
+      
+      function drawChart() {
+          	const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() {
+				console.log('RESPONSE : ' + this.responseText);
+				
+				var strsplit = this.responseText.split('_');
+				
+				cpu1 = cpu2;
+				cpu2 = cpu3;
+				cpu3 = cpu4;
+				cpu4 = cpu5;
+				cpu5 = cpu6;
+				cpu6 = cpu7;
+				cpu7 = cpu8;
+				cpu8 = cpu9;
+				cpu9 = cpu10;
+				cpu10 = Number(strsplit[1].split('%')[0]);
+				
+				ram1 = ram2;
+				ram2 = ram3;
+				ram3 = ram4;
+				ram4 = ram5;
+				ram5 = ram6;
+				ram6 = ram7;
+				ram7 = ram8;
+				ram8 = ram9;
+				ram9 = ram10;
+				ram10 = Number(strsplit[2].split('@')[0].split('%')[0]);
+				
+				storage1 = storage2;
+				storage2 = storage3;
+				storage3 = storage4;
+				storage4 = storage5;
+				storage5 = storage6;
+				storage6 = storage7;
+				storage7 = storage8;
+				storage8 = storage9;
+				storage9 = storage10;
+				storage10 = Number(strsplit[3].split('@')[0].split('%')[0]);
+				
+				var data = google.visualization.arrayToDataTable([
+		            ['USED', 'CPU', 'RAM', 'STORAGE'],
+		            ['1',  cpu1,  ram1,  storage1],
+		            ['2',  cpu2,  ram2,  storage2],
+		            ['3',  cpu3,  ram3,  storage3],
+		            ['4',  cpu4,  ram4,  storage4],
+		            ['5',  cpu5,  ram5,  storage5],
+		            ['6',  cpu6,  ram6,  storage6],
+		            ['7',  cpu7,  ram7,  storage7],
+		            ['8',  cpu8,  ram8,  storage8],
+		            ['9',  cpu9,  ram9,  storage9],
+		            ['10',  cpu10,  ram10,  storage10]
+		          ]);
+
+				 var options = {
+					        chart: {
+					          title: 'Box Office Earnings in First Two Weeks of Opening',
+					          subtitle: 'in millions of dollars (USD)'
+					        }
+					      };
+
+		          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+		          chart.draw(data, options);
+				
+			}
+			
+			setInterval(function() {
+				xhttp.open("GET", '/vmmonitoring/'+${vmnumber}, true);
+				xhttp.send();
+			}, 2000)
+        }
+      
     </script>
 </body>
 </html>
