@@ -1,94 +1,39 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-a,
-a:link,
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-li {
-	list-style: none;
+.box2 {
+	float: right;
+	padding-right: 15%;
 	padding-top: 3%;
 }
 
-
 .box1 {
 	float: left;
-	margin: 20px;
-	padding-left: 5%;
+	padding-left: 15%;
+	padding-top: 1%;
 }
 
-.box2 {
-	display: inline-block;
-	margin: 20px;
-	padding: 5%;
-
+.box1 li {
+	margin-top: 3%;
 }
 
-.smalltext {
-	margin: 20px;
-}
-
-.box3 {
-	display: inline-block;
-}
-
-.box4 {
-	float: left;
-	width: 40px;
-	height: 20px;
-	background-color: crimson;
-	text-align: center;
-}
-
-.box5 {
-	display: inline-block;
-	width: 40px;
-	height: 20px;
-	background-color: cornflowerblue;
-	text-align: center;
-	margin-left: 10px;
-}
-
-.scroll_box::-webkit-scrollbar {
-	width: 6px;
-}
-
-.scroll_box::-webkit-scrollbar-track {
-	background-color: transparent;
-}
-
-.scroll_box::-webkit-scrollbar-thumb {
-	border-radius: 3px;
-	background-color: gray;
-}
-
-.scroll_box::-webkit-scrollbar-button {
-	width: 0;
-	height: 0;
-}
-
-.status {
-	text-align: center;
+body {
+	font-size: 20px;
+	/* 원하는 크기로 조절하세요. */
 }
 
 .box6 {
-	display: inline-block;
-	width: 40px;
-	height: 20px;
-	background-color: violet;
+
+	color: #fff;
+	background-color: #4e73df;
+	border-color: #4e73df;
 }
 
-.scroll_box {
-	display: inline-block;
-	overflow-y: scroll;
-	width: 60px;
-	height: 100px;
-	padding: 10px;
-	background-color: #ffffff99;
+#catalTypeInfo {
+	font-size: 24px;
+}
+
+.sticky-footer {
+	font-size: 24px;
+}
+
+footer span {
+	font-size: 16px;
 }
