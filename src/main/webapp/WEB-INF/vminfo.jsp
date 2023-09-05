@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BANKERS - Monitoring</title>
+    <title>BANKERS - Info</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -144,7 +143,6 @@
 											<th>CPU %</th>
 											<th>RAM %, GB</th>
 											<th>Storage %, GB</th>
-											<th>버튼</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -242,32 +240,6 @@
 				xhttp.open("GET", '/vmmonitoring/'+vmnumber, true);
 				xhttp.send();
 			}, 2000)
-			
-			var recordbtn = document.createElement("a");
-			recordbtn.setAttribute('class', 'btn btn-secondary btn-icon-split');
-			recordbtn.setAttribute('href', '/vminfo/'+vmnumber);
-				
-			var iconbox = document.createElement("span");
-			iconbox.setAttribute('class', 'icon text-white-50');
-				
-			var icon = document.createElement("span");
-			icon.setAttribute('class', 'fas fa-arrow-right');
-				
-			var btntext = document.createElement("span");
-			btntext.setAttribute('class', 'text');
-			btntext.innerHTML = '상세보기';
-			
-			iconbox.appendChild(icon);
-			recordbtn.appendChild(iconbox);
-			recordbtn.appendChild(btntext);
-				
-			var cell = document.createElement("td");
-			cell.appendChild(recordbtn);
-			newRow.appendChild(cell);
-		}else{
-			var cell = document.createElement("td");
-			cell.textContent = '모니터링 불가';
-			newRow.appendChild(cell);
 		}
     }
 	

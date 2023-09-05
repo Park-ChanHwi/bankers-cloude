@@ -32,6 +32,13 @@ public class MainController {
 		return mv;
 	}
 	
+	@GetMapping("/vminfo/{vmnumber}")
+	public ModelAndView vminfoPage(@PathVariable String vmnumber) {
+		ModelAndView mv = new ModelAndView("vminfo");
+		mv.addObject(vmnumber);
+		return mv;
+	}
+	
 	@GetMapping("/loadingcheck/{vmnumber}")
 	public String loadingcheck(@PathVariable String vmnumber) {
 		
@@ -67,9 +74,9 @@ public class MainController {
 		
 		String[] vmInfo = responseEntity.getBody().toString().split("_");
 		
-		System.out.println(responseEntity.getBody().toString());
-		
-		String vmcpu = Integer.parseInt(vmInfo[1].substring(2, 4)) + "." + vmInfo[1].substring(4, 5) + "%";
+		double d = Double.parseDouble(vmInfo[1]) * 1000;
+		d = Math.floor(d);
+		String vmcpu = (d / 10) + "%";
 		String vmram = vmLoadDecode(vmInfo[2], vmInfo[3]);
 		String vmstorage = vmLoadDecode(vmInfo[4], vmInfo[5]);
 		
