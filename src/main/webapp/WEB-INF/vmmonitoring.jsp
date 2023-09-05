@@ -245,7 +245,7 @@
 			
 			var recordbtn = document.createElement("a");
 			recordbtn.setAttribute('class', 'btn btn-secondary btn-icon-split');
-			recordbtn.setAttribute('href', '/vminfo/'+vmnumber);
+			recordbtn.setAttribute('href', 'vminfo/'+vmnumber);
 				
 			var iconbox = document.createElement("span");
 			iconbox.setAttribute('class', 'icon text-white-50');

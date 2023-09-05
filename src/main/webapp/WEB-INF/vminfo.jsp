@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,16 +10,42 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BANKERS - Info</title>
+    <title>BANKERS - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['Year', 'Sales', 'Expenses'],
+            ['2004',  1000,      400],
+            ['2005',  1170,      460],
+            ['2006',  660,       1120],
+            ['2007',  1030,      540]
+          ]);
+
+          var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart.draw(data, options);
+        }
+    </script>
 </head>
 
 <body id="page-top">
@@ -111,7 +138,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${id}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -131,25 +158,43 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">VM 리스트</h6>
+                            <h6 class="m-0 font-weight-bold text-primary" id="monitorname">모니터</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="vmTable" class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                              				<th>번호</th>	
+	                        <table>
+							    <tr>
+							        <td style="width:40%" valign="top" id='infotext'>
+							        	vm이름 : <br>
+							        	ID : <br>
+							        	접속주소 : <br>
+							        	=유형=<br>
+							        	type<br>
+							        	cpu<br>
+							        	ram<br>
+							        	storage<br>
+									</td>
+							        <td>
+	   									<div id="curve_chart" style="width: 400px; height: 200px"></div>
+									</td>
+							    </tr>
+							</table>
+	                        <div class="table-responsive">
+	                        	<table id="vmlog" class="table table-bordered" width="100%" cellspacing="0">
+	                        		<thead>
+	                        			<tr>
+	                              			<th>번호</th>	
 											<th>VM 이름</th>
-											<th>CPU %</th>
-											<th>RAM %, GB</th>
-											<th>Storage %, GB</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+											<th>유형</th>
+											<th>상태</th>
+											<th>주소</th>
+											<th>생성 날짜</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -193,68 +238,59 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.js"></script>
-
-	<script>
-	var vmnumber = decode("${vmnumber}");
+    <script src="/js/sb-admin-2.js"></script>
+    
+    <script>
+    
+	var createdate = decode("${createdate}");
 	var vmname = decode("${vmname}");
-	var vmcpu = decode("${vmcpu}");
-	var vmram = decode("${vmram}");
-	var vmstorage = decode("${vmstorage}");
+	var vmcatal = decode("${vmcatal}");
+	var vmaddress = decode("${vmaddress}");
+	var vmstate = decode("${vmstate}");
+    
+    var monitorname = document.getElementById("monitorname");
+    monitorname.innerHTML = vmname[vmname.length - 1] + ' 모니터';
 	
-	for(var i = 0; i < vmname.length; i++){
-		addRow(i+1, vmnumber[i], vmname[i], vmcpu[i], vmram[i], vmstorage[i]);
+    for(var i = vmname.length - 1; i >= 0; i--){
+		addRow(vmname.length - i, createdate[i], vmname[i], vmcatal[i], vmstate[i], vmaddress[i]);
 	}
 	
-	function addRow(number, vmnumber, vmname, vmcpu, vmram, vmstorage) {
-        var table = document.getElementById("vmTable");
+	function addRow(number, createdate, vmname, vmcatal, vmstate, vmaddress) {
+        var table = document.getElementById("vmlog");
         var newRow = document.createElement("tr");
 		
-        newRow.setAttribute('id', vmname);
-        
         addColumn(newRow,number);
         addColumn(newRow,vmname);
-        addColumn(newRow,vmcpu);
-        addColumn(newRow,vmram);
-        addColumn(newRow,vmstorage);
+        addColumn(newRow,vmcatal);
+        addColumn(newRow,vmstate);
+        addColumn(newRow,vmaddress);
+        addColumn(newRow,createdate);
         
         table.getElementsByTagName('tbody')[0].appendChild(newRow);
-        
-		if(!(vmnumber == 'PREPARING' || vmnumber == 'TOOL-OFF' || vmnumber == 'POWER-OFF')){
-			 const xhttp = new XMLHttpRequest();
-				xhttp.onload = function() {
-				var strsplit = this.responseText.replace('@', ' ').split('_');
-					
-				var row = document.getElementById(strsplit[0]);
-				row.getElementsByTagName("td")[2].innerText = strsplit[1];
-				row.getElementsByTagName("td")[3].innerText = strsplit[2];
-				row.getElementsByTagName("td")[4].innerText = strsplit[3];
-			}
-			
-			setInterval(function() {
-				xhttp.open("GET", '/vmmonitoring/'+vmnumber, true);
-				xhttp.send();
-			}, 2000)
-		}
     }
 	
+    var infotext = document.getElementById("infotext");
+    infotext.innerHTML = 'VM 이름 : ' + vmname[vmname.length - 1] + '<br>';
+    infotext.innerHTML += 'ID : ' + ${vmnumber} + '<br>';
+	
+    
+    
 	function addColumn(row, str){
 		var cell = document.createElement("td");
         cell.textContent = str;
         row.appendChild(cell);
 	}
-	
-	function decode(str){
-		var strtrim = str.replace(/ /g, '');
-		var strslice = strtrim.slice(1, -1);
-		var addspace = strslice.replace('@', ' ');
-		var strsplit = addspace.split(',');
+    
+    function decode(str){
+    	var strsplit = str.split('_');
 		return strsplit;
-	}
-	</script>
+    }
+    
+    </script>
 </body>
+</html>
