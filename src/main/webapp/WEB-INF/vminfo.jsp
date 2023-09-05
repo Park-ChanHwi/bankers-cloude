@@ -102,7 +102,7 @@
                     </button>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-0 text-gray-800">VM 모니터링</h1>
+                    <h1 class="h3 mb-0 text-gray-800">VM 정보</h1>
                     
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

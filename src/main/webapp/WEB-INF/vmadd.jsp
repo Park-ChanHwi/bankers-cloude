@@ -80,7 +80,7 @@
 					</button>
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-0 text-gray-800">대시보드</h1>
+					<h1 class="h3 mb-0 text-gray-800">VM 추가하기</h1>
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
@@ -164,9 +164,7 @@
 
 									<!-- <p>=명세서=</p>  -->
 									<p id="vmname">VM 이름:</p>
-									<div class="card-header py-3">
 
-									</div>
 									<p id="catalTypeInfo">
 										=유형 A=<br> type: mini<br> cpu: 1개<br> ram: 8GB<br>
 										storage: 20GB<br>
