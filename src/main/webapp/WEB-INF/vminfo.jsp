@@ -366,8 +366,7 @@
 
 				 var options = {
 					        chart: {
-					          title: 'Box Office Earnings in First Two Weeks of Opening',
-					          subtitle: 'in millions of dollars (USD)'
+					          title: 'used %',
 					        }
 					      };
 

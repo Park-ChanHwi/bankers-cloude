@@ -1,8 +1,15 @@
 package bankers.fisa.controller;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.URI;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -24,7 +31,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MainController {
 	
 	private static final int COOKIE_TIME = 3600;
-	
+	private static final String centerURL = "http://127.0.0.1:7070";
 	@GetMapping("/")
 	public ModelAndView indexPage() {
 		ModelAndView mv = new ModelAndView();
@@ -42,7 +49,7 @@ public class MainController {
 		String vmAddress = new String();
 		String vmState = new String();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/getlog")
 				.encode()
 				.build()
@@ -76,7 +83,7 @@ public class MainController {
 	@GetMapping("/loadingcheck/{vmnumber}")
 	public String loadingcheck(@PathVariable String vmnumber) {
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/loadingcheck")
 				.encode()
 				.build()
@@ -94,7 +101,7 @@ public class MainController {
 	@GetMapping("/vmmonitoring/{vmnumber}")
 	public String getVMMonitoringInfo(@PathVariable String vmnumber) {
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 		.path("/center/getvmmonitoringinfo")
 		.encode()
 		.build()
@@ -134,7 +141,7 @@ public class MainController {
 		ArrayList<String> vmram = new ArrayList<String>();
 		ArrayList<String> vmstorage = new ArrayList<String>();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/vmmonitoringlist")
 				.encode()
 				.build()
@@ -213,7 +220,7 @@ public class MainController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/vmupdate")
 				.encode()
 				.build()
@@ -252,7 +259,7 @@ public class MainController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/vmdelete")
 				.encode()
 				.build()
@@ -280,7 +287,7 @@ public class MainController {
 		
 		ModelAndView mv = new ModelAndView("vmmanagement");
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/getvm")
 				.encode()
 				.build()
@@ -330,7 +337,7 @@ public class MainController {
 			@CookieValue("id") String id) {
 		ModelAndView mv = new ModelAndView();
 		
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/vmcreate")
 				.encode()
 				.build()
@@ -352,39 +359,39 @@ public class MainController {
 			@RequestParam("loginID") String id,
 			@RequestParam("loginPW") String pw,
 			HttpServletResponse response) {
+		
 		ModelAndView mv = new ModelAndView();
 		if(!login(id, pw)) {
 			mv.setViewName("fail");
 			return mv;
 		}
-		
-//		URI uri_pos = UriComponentsBuilder.fromUriString("http://localhost:7070")
-//				.path("/center/custpos")
-//				.encode()
-//				.build()
-//				.toUri();
-//		
-//		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-//		parameters.add("custId", id);
-//		
-//		RestTemplate restTemplatePos = new RestTemplate();
-//		ResponseEntity<String> responseEntityPos = restTemplatePos.postForEntity(uri_pos, parameters, String.class);
-//		String pos = responseEntityPos.getBody();
-//		System.out.println(pos);
-		
 		Cookie idCookie = new Cookie("id", id);
-		idCookie.setDomain("localhost");
+		
+		String domain = "localhost";
+		
+		try {
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = networkInterfaces.nextElement();
+                Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
+                while (inetAddresses.hasMoreElements()) {
+                    InetAddress inetAddress = inetAddresses.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
+                        System.out.println("내 IP 주소: " + inetAddress.getHostAddress());
+                        domain = inetAddress.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+		
+		idCookie.setDomain(domain);
 		idCookie.setPath("/");
 		idCookie.setMaxAge(COOKIE_TIME);
-		idCookie.setSecure(true);
+		idCookie.setSecure(false);
+		idCookie.setHttpOnly(false);
 		response.addCookie(idCookie);
-		
-//		Cookie posCookie = new Cookie("pos", pos);
-//		posCookie.setDomain("localhost");
-//		posCookie.setPath("/");
-//		posCookie.setMaxAge(COOKIE_TIME);
-//		posCookie.setSecure(true);
-//		response.addCookie(posCookie);
 		
 		mv.setViewName("redirect:/dashboard");
 		
@@ -432,7 +439,7 @@ public class MainController {
 		ArrayList<String> vmcatal = new ArrayList<String>();
 		ArrayList<String> vmcustid = new ArrayList<String>();
 			
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/vmlist")
 				.encode()
 				.build()
@@ -471,7 +478,7 @@ public class MainController {
 	}
 	
 	private String getVMAlarm(String vmnumber) {
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/getvmalarm")
 				.encode()
 				.build()
@@ -486,7 +493,7 @@ public class MainController {
 	}
 	
 	private String getCustEmp(String custEmpNumber) {
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/custemp")
 				.encode()
 				.build()
@@ -501,19 +508,18 @@ public class MainController {
 	}
 	
 	private boolean login(String id, String pw) {
-		URI uri = UriComponentsBuilder.fromUriString("http://localhost:7070")
+		URI uri = UriComponentsBuilder.fromUriString(centerURL)
 				.path("/center/login")
 				.encode()
 				.build()
 				.toUri();
-
+		
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("loginID", id);
 		parameters.add("loginPW", pw);
 		
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(uri, parameters, String.class);
-		
 		if(responseEntity.getBody().equals("true")) {
 			return true;
 		}else {

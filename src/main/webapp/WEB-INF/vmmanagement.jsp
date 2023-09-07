@@ -194,7 +194,7 @@
 										onclick="location.href='/vmdelete/${vmid}'">삭제</button>
 								</a> <a class="btn btn-primary btn-icon-split"> <span
 									class="icon text-white-50"> <i class="fas fa-flag"></i></span>
-									<input class="box6" type="submit" value="생성">
+									<input class="box6" type="submit" value="수정">
 								</a>
 
 							</div>
